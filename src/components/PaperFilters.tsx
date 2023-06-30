@@ -35,7 +35,7 @@ const PaperFilters: React.FC<PaperFiltersProps> = ({
       const endDateObj = new Date(endDate);
 
       filteredData = filteredData.filter((paper) => {
-        const paperDate = new Date(paper.date);
+        const paperDate = new Date(paper.year_published);
         return paperDate >= startDateObj && paperDate <= endDateObj;
       });
     }
@@ -45,18 +45,18 @@ const PaperFilters: React.FC<PaperFiltersProps> = ({
         (paper) => paper.category === category
       );
     } else {
-      filteredData = filteredData.filter((paper) => paper.altText === "image");
+      filteredData = filteredData.filter((paper) => paper.title !== "");
     }
 
     filteredData.sort((a, b) => {
-      const dateA = new Date(a.date).getTime();
-      const dateB = new Date(b.date).getTime();
+      const dateA = new Date(a.year_published).getTime();
+      const dateB = new Date(b.year_published).getTime();
       return sortOption === "oldest" ? dateA - dateB : dateB - dateA;
     });
 
     if (searchQuery) {
       filteredData = filteredData.filter((paper) =>
-        paper.title_en.toLowerCase().includes(searchQuery.toLowerCase())
+        paper.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 

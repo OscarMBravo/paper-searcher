@@ -13,7 +13,7 @@ const PaperList: React.FC<PaperListProps> = ({ paperData }) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {paperData.map((paper, index) => (
           <a
-            href={paper.link}
+            href={paper.pdf_url}
             target="_blank"
             rel="noopener noreferrer"
             key={index}
