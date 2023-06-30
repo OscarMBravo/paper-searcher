@@ -1,7 +1,7 @@
 import React from "react";
-import "../css/NewsCard.css";
+import "../styles/PaperCard.css";
 
-interface NewsCardProps {
+interface PaperCardProps {
   id: number;
   created_at: string;
   date: string;
@@ -18,7 +18,7 @@ interface NewsCardProps {
   altText: string;
 }
 
-const NewsCard: React.FC<NewsCardProps> = ({
+const PaperCard: React.FC<PaperCardProps> = ({
   title_en,
   blurb_en,
   date,
@@ -47,4 +47,4 @@ const NewsCard: React.FC<NewsCardProps> = ({
   );
 };
 
-export default NewsCard;
+export default PaperCard;

@@ -1,24 +1,24 @@
 import React from "react";
-import NewsCard from "./NewsCard";
-import { News } from "../data/NewsData";
+import PaperCard from "./PaperCard";
+import { Paper } from "../data/PaperData";
 
-interface NewsListProps {
-  newsData: News[];
+interface PaperListProps {
+  paperData: Paper[];
 }
 
-const NewsList: React.FC<NewsListProps> = ({ newsData }) => {
+const PaperList: React.FC<PaperListProps> = ({ paperData }) => {
   return (
     <div className="p-4">
       <div className="flex mb-4"></div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {newsData.map((news, index) => (
+        {paperData.map((paper, index) => (
           <a
-            href={news.link}
+            href={paper.link}
             target="_blank"
             rel="noopener noreferrer"
             key={index}
           >
-            <NewsCard {...news} />
+            <PaperCard {...paper} />
           </a>
         ))}
       </div>
@@ -26,4 +26,4 @@ const NewsList: React.FC<NewsListProps> = ({ newsData }) => {
   );
 };
 
-export default NewsList;
+export default PaperList;

@@ -1,4 +1,4 @@
-export interface News {
+export interface Paper {
   id: number;
   created_at: string;
   date: string;
@@ -18,7 +18,7 @@ export interface News {
   altText: string;
 }
   
-export const initialNewsData: News[] = [
+export const initialPaperData: Paper[] = [
   {
     "id": 12,
     "created_at": "2022-11-02T10:03:28.448392+00:00",

@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import { News } from "../data/NewsData";
+import { Paper } from "../data/PaperData";
 import SearchBar from "./SearchBar";
 import CategoryFilter from "./CategoryFilter";
 import SortMenu from "./SortMenu";
 import DateRangePicker from "./DateRangePicker";
 
-interface NewsFiltersProps {
-  newsData: News[];
-  onFilteredData: (filteredData: News[]) => void;
+interface PaperFiltersProps {
+  paperData: Paper[];
+  onFilteredData: (filteredData: Paper[]) => void;
 }
 
-const NewsFilters: React.FC<NewsFiltersProps> = ({
-  newsData,
+const PaperFilters: React.FC<PaperFiltersProps> = ({
+  paperData,
   onFilteredData,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -21,29 +21,31 @@ const NewsFilters: React.FC<NewsFiltersProps> = ({
   const [dateRangeSelected, setDateRangeSelected] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const filterNewsData = (
+  const filterPaperData = (
     category: string,
     sortOption: string,
     startDate: string,
     endDate: string,
     searchQuery: string
   ) => {
-    let filteredData: News[] = newsData;
+    let filteredData: Paper[] = paperData;
 
     if (startDate && endDate && dateRangeSelected) {
       const startDateObj = new Date(startDate);
       const endDateObj = new Date(endDate);
 
-      filteredData = filteredData.filter((news) => {
-        const newsDate = new Date(news.date);
-        return newsDate >= startDateObj && newsDate <= endDateObj;
+      filteredData = filteredData.filter((paper) => {
+        const paperDate = new Date(paper.date);
+        return paperDate >= startDateObj && paperDate <= endDateObj;
       });
     }
 
     if (category !== "All" && category !== "") {
-      filteredData = filteredData.filter((news) => news.category === category);
+      filteredData = filteredData.filter(
+        (paper) => paper.category === category
+      );
     } else {
-      filteredData = filteredData.filter((news) => news.altText === "image");
+      filteredData = filteredData.filter((paper) => paper.altText === "image");
     }
 
     filteredData.sort((a, b) => {
@@ -53,8 +55,8 @@ const NewsFilters: React.FC<NewsFiltersProps> = ({
     });
 
     if (searchQuery) {
-      filteredData = filteredData.filter((news) =>
-        news.title_en.toLowerCase().includes(searchQuery.toLowerCase())
+      filteredData = filteredData.filter((paper) =>
+        paper.title_en.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 
@@ -67,7 +69,7 @@ const NewsFilters: React.FC<NewsFiltersProps> = ({
         searchQuery={searchQuery}
         onSearchQueryChange={setSearchQuery}
         onSearch={() =>
-          filterNewsData(
+          filterPaperData(
             selectedCategory,
             sortBy,
             startDate,
@@ -81,7 +83,7 @@ const NewsFilters: React.FC<NewsFiltersProps> = ({
         selectedCategory={selectedCategory}
         onCategoryChange={(category) => {
           setSelectedCategory(category);
-          filterNewsData(category, sortBy, startDate, endDate, searchQuery);
+          filterPaperData(category, sortBy, startDate, endDate, searchQuery);
         }}
       />
 
@@ -89,7 +91,7 @@ const NewsFilters: React.FC<NewsFiltersProps> = ({
         sortBy={sortBy}
         onSortChange={(sortOption) => {
           setSortBy(sortOption);
-          filterNewsData(
+          filterPaperData(
             selectedCategory,
             sortOption,
             startDate,
@@ -105,12 +107,12 @@ const NewsFilters: React.FC<NewsFiltersProps> = ({
         onStartDateChange={(date) => {
           setStartDate(date);
           setDateRangeSelected(true);
-          filterNewsData(selectedCategory, sortBy, date, endDate, searchQuery);
+          filterPaperData(selectedCategory, sortBy, date, endDate, searchQuery);
         }}
         onEndDateChange={(date) => {
           setEndDate(date);
           setDateRangeSelected(true);
-          filterNewsData(
+          filterPaperData(
             selectedCategory,
             sortBy,
             startDate,
@@ -120,7 +122,7 @@ const NewsFilters: React.FC<NewsFiltersProps> = ({
         }}
         onApplyDateRange={() => {
           setDateRangeSelected(true);
-          filterNewsData(
+          filterPaperData(
             selectedCategory,
             sortBy,
             startDate,
@@ -133,4 +135,4 @@ const NewsFilters: React.FC<NewsFiltersProps> = ({
   );
 };
 
-export default NewsFilters;
+export default PaperFilters;

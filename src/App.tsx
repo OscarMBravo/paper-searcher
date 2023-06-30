@@ -1,23 +1,23 @@
 import React, { useState } from "react";
 import "./App.css";
-import NewsList from "./components/NewsList";
-import NewsFilters from "./components/NewsFilters";
-import { News, initialNewsData } from "./data/NewsData";
+import PaperList from "./components/PaperList";
+import PaperFilters from "./components/PaperFilters";
+import { Paper, initialPaperData } from "./data/PaperData";
 
 const App = () => {
-  const [filteredData, setFilteredData] = useState(initialNewsData);
+  const [filteredData, setFilteredData] = useState(initialPaperData);
 
-  const handleFilteredData = (data: News[]) => {
+  const handleFilteredData = (data: Paper[]) => {
     setFilteredData(data);
   };
 
   return (
     <div>
-      <NewsFilters
-        newsData={initialNewsData}
+      <PaperFilters
+        paperData={initialPaperData}
         onFilteredData={handleFilteredData}
       />
-      <NewsList newsData={filteredData} />
+      <PaperList paperData={filteredData} />
     </div>
   );
 };
